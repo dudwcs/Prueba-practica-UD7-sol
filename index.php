@@ -17,48 +17,73 @@
     <div class="container-fluid">
         <h1>Prueba práctica UD7</h1>
 
-        <form method="post" id="cargarNotasForm">
-            <button type="submit" class="btn btn-primary">Consultar notas</button>
-        </form>
-
-        <section>
+        <section id="notas-section" >
+            <h2>Listado de notas</h2>
             <div id="notas">
+            </div>         
 
-
-
-            </div>
-            <form action="" method="post" id="crearForm">
-
-                <button type="submit" class="btn btn-secondary">Crear nota</button>
-            </form>
+            <button type="button" id="btnCrearNota" class="btn btn-primary">Crear nota</button>
 
         </section>
 
+        <section id="crear-section" class="d-none">
+        <h2>Crear nota</h1>
 
-        <!-- Modal -->
-        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modal_title">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body" id='modal_msg'>
+        <!-- formulario de creación -->
+            <form id="crearForm">
+                <div class="form-group">
+                    <label for="title">Título</label>
+                    <input class="form-control" id="title" placeholder="Title">
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                            id='opt_cancel'>Cancelar</button>
-                        <button type="button" class="btn btn-primary" id='opt_ok'>Aceptar</button>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Crear</button>
+            </form>
+
+            <!-- mensaje de info/error/éxito -->
+            <div class="alert alert-primary d-none" role="alert" id="div-msg">
+                Esto es un mensaje que se cambia en función del éxito/fracaso de la operación
+            </div>
+
+
+         
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal_title">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id='modal_msg'>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                id='opt_cancel'>Cancelar</button>
+                            <button type="button" class="btn btn-primary" id='opt_ok'>Aceptar</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
 
-        <script src="js/global.js" type="text/javascript"></script>
-        <script src="js/cargarDatos.js" type="text/javascript"></script>
-        <script src="js/modal.js" type="text/javascript"></script>
+
+            <script src="js/global.js" type="text/javascript"></script>
+            <script src="js/index.js" type="text/javascript"></script>
+            <script src="js/crear.js" type="text/javascript"></script>
+            <script src="js/modal.js" type="text/javascript"></script>
+
+
+
+
+
+
+
     </div>
 </body>
 
