@@ -8,7 +8,7 @@
  */
 class Nota implements JsonSerializable{
     
-    use ViewData;
+  
     
     private ?int $id;
     private string $title="";
