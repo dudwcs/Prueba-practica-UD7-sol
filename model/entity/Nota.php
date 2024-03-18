@@ -36,8 +36,8 @@ class Nota implements JsonSerializable{
             'id' => $this->id,
             'title' => $this->title,
             'completed' => $this->completed,
-            'createdAt' => $this->createdAt,
-            'updatedAt' => $this->updatedAt
+            'createdAt' => $this->createdAt!=null? $this->createdAt->format('Y-m-d\TH:i:sO'): null,
+            'updatedAt' => $this->updatedAt!=null? $this->updatedAt->format('Y-m-d\TH:i:sO'):null
         );
     }
 

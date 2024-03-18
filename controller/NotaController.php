@@ -2,7 +2,8 @@
 
 class NotaController
 {
-
+    //Cambiar constante TITULO_NOTA_PERMITIDO
+    private const TITULO_NOTA_PERMITIDO = "ALGO";
     public string $page_title;
     public string $view;
     private INotaServicio $notaServicio;
@@ -42,26 +43,37 @@ class NotaController
         return $nota;
     }
 
- 
+
 
     public function create()
     {
-        $data = json_decode(file_get_contents("php://input"), true);
-        if (isset ($data)) {
-            if(isset($data["title"], $data["completed"], $data["createdAt"], $data["updatedAt"])){
-            $createdAt = DateTimeImmutable::createFromFormat('Y-m-d\TH:i:sO' ,$data["createdAt"]);
-            $updatedAt = DateTimeImmutable::createFromFormat('Y-m-d\TH:i:sO' ,$data["updatedAt"]);
-            $nota = new Nota(null, $data["title"], $data["completed"], $createdAt, $updatedAt);
 
-            $notaGuardada = $this->notaServicio->save($nota);
+        if (isset ($_POST["title"], $_POST["completed"], $_POST["createdAt"], $_POST["updatedAt"])) {
+            if ($this->validateTitle(trim($_POST["title"]))) {
+                $createdAt = DateTimeImmutable::createFromFormat('Y-m-d\TH:i:sO', $_POST["createdAt"]);
+                $updatedAt = DateTimeImmutable::createFromFormat('Y-m-d\TH:i:sO', $_POST["updatedAt"]);
+                $nota = new Nota(null, $_POST["title"], $_POST["completed"], $createdAt, $updatedAt);
 
-            return json_encode($notaGuardada);
+                $notaGuardada = $this->notaServicio->save($nota);
+
+                return json_encode($notaGuardada);
+            } else {
+                http_response_code(404);
+                $response["error"] = "No se permite ese título";
+                return json_encode($response);
             }
-            
+
+
+        } else {
+            http_response_code(404);
+            $response["error"] = true;
+            return json_encode($response);
         }
-        http_response_code(404);
-        $response["error"]=true;
-        return json_encode($response);
+    }
+
+    private function validateTitle($title): bool
+    {
+        return $title === self::TITULO_NOTA_PERMITIDO;
     }
 
 

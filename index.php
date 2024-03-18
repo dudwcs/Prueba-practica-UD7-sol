@@ -17,66 +17,80 @@
     <div class="container-fluid">
         <h1>Prueba práctica UD7</h1>
 
-        <section id="notas-section" >
+        <section id="notas-section">
             <h2>Listado de notas</h2>
             <div id="notas">
-            </div>         
+            </div>
+
+           
+
+            <!-- loading spinner -->
+
+            <div class="d-flex flex-column justify-content-center" id="loading-div">
+                <div class="spinner-grow text-primary align-self-center" role="status" role="status"></div>
+                <div class="align-self-center">
+                    <strong>Cargando notas...</strong>
+                </div>
+            </div>
+
 
             <button type="button" id="btnCrearNota" class="btn btn-primary">Crear nota</button>
 
         </section>
 
         <section id="crear-section" class="d-none">
-        <h2>Crear nota</h1>
+            <h2>Crear nota</h1>
 
-        <!-- formulario de creación -->
-            <form id="crearForm">
-                <div class="form-group">
-                    <label for="title">Título</label>
-                    <input class="form-control" id="title" placeholder="Title">
+                <!-- formulario de creación de nota -->
+                <form id="crearForm">
+                    <div class="form-group">
+                        <label for="title">Título</label>
+                        <input class="form-control" id="title" placeholder="Title" required>
 
-                </div>
-
-
-                <button type="submit" class="btn btn-primary">Crear</button>
-            </form>
-
-            <!-- mensaje de info/error/éxito -->
-            <div class="alert alert-primary d-none" role="alert" id="div-msg">
-                Esto es un mensaje que se cambia en función del éxito/fracaso de la operación
-            </div>
+                    </div>
 
 
-         
+                    <button type="submit" class="btn btn-secondary mt-3">Crear</button>
+                </form>
 
 
 
-            <!-- Modal -->
-            <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modal_title">Modal title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body" id='modal_msg'>
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                id='opt_cancel'>Cancelar</button>
-                            <button type="button" class="btn btn-primary" id='opt_ok'>Aceptar</button>
-                        </div>
+        </section>
+
+
+        <!-- mensaje de info/error/éxito -->
+        <div class="alert alert-info d-none mt-3" role="alert" id="div-msg">
+            Esto es un mensaje que se cambia en función del éxito/fracaso de la operación
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal_title">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id='modal_msg'>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                            id='opt_cancel'>Cancelar</button>
+                        <button type="button" class="btn btn-primary" id='opt_ok'>Aceptar</button>
                     </div>
                 </div>
             </div>
+        </div>
 
 
 
-            <script src="js/global.js" type="text/javascript"></script>
-            <script src="js/index.js" type="text/javascript"></script>
-            <script src="js/crear.js" type="text/javascript"></script>
-            <script src="js/modal.js" type="text/javascript"></script>
+        <script src="js/global.js" type="text/javascript"></script>
+        <script src="js/index.js" type="text/javascript"></script>
+        <script src="js/crear.js" type="text/javascript"></script>
+        <script src="js/modal.js" type="text/javascript"></script>
 
 
 

@@ -1,37 +1,20 @@
-// window.onload = onceLoaded;
-// function onceLoaded() {
-
-//     crearNotasForm = document.querySelector("#crearForm");
-//     if (crearNotasForm) {
-//         crearNotasForm.onsubmit = function (event) {
-//             event.preventDefault();
-//             if (validarTitulo()) {
-//                 confirmCrear(event);
-//             }
-//             else {
-//                 showMsg("No se permite la creación de notas que contengan: " + prohibiciones.join(", "), true, "div-msg", "alert-info");
-//             }
-//         }
-
-//     }
-// }
-
-function confirmCrear() {
- 
-    showModal("modal", "Confirmación creación", "Va usted a crear una nueva nota, ¿está usted seguro/a?", null, null, crearNota, null);
 
 
-
+function confirmCrearNotaLocal(data) {
+    showModal("modal", "Confirmación creación en local", "Va usted a crear una nueva nota en el servidor local, ¿está usted seguro/a?",
+        null, null, function () {
+            crearNotaLocal(data);
+        }, null);
 }
 
-function crearNota() {
+function crearNotaApiRemota() {
     title_element = document.querySelector("#title");
 
     data = {
         "title": title_element.value
     }
 
-    const request = new Request(base_url, {
+    const request = new Request(REMOTE_API_URL, {
         method: "POST",
         body: JSON.stringify(data)
     });
@@ -39,41 +22,52 @@ function crearNota() {
     fetch(request)
         .then(response => {
             if (response.status === 201) {
-                showMsg('La nota se ha creado con éxito', true, 'div-msg', 'alert-success');
+                showMsg('La nota se ha creado con éxito en la Api remota', true, 'div-msg', false);
             }
             else {
-                showMsg('La nota no se ha podido crear', true, 'div-msg', 'alert-danger');
+                showMsg('La nota no se ha podido crear en la  Api remota', true, 'div-msg', false);
             }
             return response.json();
         }
         )
         .then(data => {
-           console.log('datos creados: ' + JSON.stringify(data));
-           crearNota2(data);
+            console.log('datos creados: ' + JSON.stringify(data));
+            confirmCrearNotaLocal(data);
         }
         )
         .catch(error => console.error('Ha ocurrido un error' + error));
 }
 
 function validarTitulo() {
-    var title_element = document.querySelector("#title");
-    for (i = 0; i < prohibiciones.length; i++) {
-        if (title_element.value && title_element.value.toLowerCase().includes(prohibiciones[i])) {
-            return false;
-        }    
-    }
-    return true;
+    let title_element = document.querySelector("#title");
+    return (title_element.value === TITULO_PERMITIDO);
 }
 
-function crearNota2(nota){
-    const request = new Request(mi_back_end_url, {
+function crearNotaLocal(nota) {
+    const formData = new FormData();
+    //enviamos datos nota sin id
+    formData.append("title", nota.title);
+    formData.append("completed", nota.completed);
+    formData.append("updatedAt", nota.updatedAt);
+    formData.append("createdAt", nota.createdAt);
+
+    const request = new Request(LOCAL_BACKEND_URL, {
         method: "POST",
-        body: JSON.stringify(nota)
+        body: formData
     });
 
     fetch(request)
-    .then(response => response.json())
-    .then(data=> console.log(data))
-    .catch(error => console.error("Ha ocurrido un error" + error));
+        .then(response => response.json())
+        .then(data => {
+
+            if (data.id) {
+                showMsg("<br/> Se ha creado localmente la nota : " + JSON.stringify(data, null, 10), true, "div-msg", true);
+            }
+            else {
+                showMsg("<br/> Ha habido un error creando la nota localmente: " + data.error, true, "div-msg", true);
+            }
+
+        })
+        .catch(error => console.error("Ha ocurrido un error" + error));
 
 }
