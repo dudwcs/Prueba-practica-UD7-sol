@@ -16,8 +16,7 @@ function showMsg(msg, show, html_id,  appendMsg) {
     var divMsg = document.getElementById(html_id);
     if (show) {
         if(appendMsg){
-            console.log('intentando crear un di msg para ' + msg);
-        divMsg.innerHTML = divMsg.innerHTML+ msg;
+           divMsg.innerHTML = divMsg.innerHTML+ msg;
         }
         else{
             divMsg.innerHTML = msg;

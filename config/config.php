@@ -2,7 +2,7 @@
 
 /* Default options */
 const DEFAULT_CONTROLLER = "Nota";
-const DEFAULT_ACTION = "save";
+const DEFAULT_ACTION = "create";
 
 const CONTROLLERS_FOLDER="controller";
 const MODELS_FOLDER = "model";

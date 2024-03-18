@@ -17,32 +17,9 @@ class NotaController
         $this->notaServicio = new NotaServicio();
     }
 
-    /* List all notes */
 
-    public function list()
-    {
-        $this->page_title = 'Listado de notas';
-        return $this->notaServicio->getNotas();
-    }
 
-    /* Load note for edit */
-
-    public function edit($id = null)
-    {
-        $this->page_title = 'Editar nota';
-        $this->view = self::VIEW_FOLDER . 'edit_note';
-        /* Id can from get param or method param */
-        if (isset ($_GET["id"])) {
-            $id = $_GET["id"];
-
-            $nota = $this->notaServicio->getNoteById($id);
-        } else {
-            //para creación
-            $nota = new Nota();
-        }
-        return $nota;
-    }
-
+   
 
 
     public function create()
